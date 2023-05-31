@@ -39,13 +39,10 @@ clip_model = CLIPModel.from_pretrained(model_path_clip, torch_dtype=torch.float1
 clip = clip_model.text_model
 
 
-# Getting our HF Auth token
-with open('hf_auth', 'r') as f:
-    auth_token = f.readlines()[0].strip()
 model_path_diffusion = "CompVis/stable-diffusion-v1-4"
 # Build our SD model
-unet = UNet2DConditionModel.from_pretrained(model_path_diffusion, subfolder="unet", use_auth_token=auth_token, revision="fp16", torch_dtype=torch.float16)
-vae = AutoencoderKL.from_pretrained(model_path_diffusion, subfolder="vae", use_auth_token=auth_token, revision="fp16", torch_dtype=torch.float16)
+unet = UNet2DConditionModel.from_pretrained(model_path_diffusion, subfolder="unet", revision="fp16", torch_dtype=torch.float16)
+vae = AutoencoderKL.from_pretrained(model_path_diffusion, subfolder="vae", revision="fp16", torch_dtype=torch.float16)
 
 # Push to devices w/ double precision
 device = 'cuda'
@@ -416,7 +413,7 @@ def baseline_stablediffusion(prompt="",
         noise = torch.randn(init_latent.shape, generator=generator, device=device, dtype=unet.dtype)
         if scheduler_str == 'ddim':
             if init_image is not None:
-                raise notImplementedError
+                raise NotImplementedError
                 latent = scheduler.add_noise(init_latent, noise,
                                          1000 - int(1000 * init_image_strength)).to(device)
             else:
