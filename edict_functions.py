@@ -39,7 +39,7 @@ clip_model = CLIPModel.from_pretrained(model_path_clip, torch_dtype=torch.float1
 clip = clip_model.text_model
 
 
-model_path_diffusion = "CompVis/stable-diffusion-v1-4"
+model_path_diffusion = "runwayml/stable-diffusion-v1-5"
 # Build our SD model
 unet = UNet2DConditionModel.from_pretrained(model_path_diffusion, subfolder="unet", revision="fp16", torch_dtype=torch.float16)
 vae = AutoencoderKL.from_pretrained(model_path_diffusion, subfolder="vae", revision="fp16", torch_dtype=torch.float16)
