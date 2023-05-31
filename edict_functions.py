@@ -387,7 +387,7 @@ def baseline_stablediffusion(prompt="",
     
     #Preprocess image if it exists (img2img)
     if init_image is not None:
-        init_image = init_image.resize((width, height), resample=Image.Resampling.LANCZOS)
+        init_image = init_image.resize((width, height), resample=Image.LANCZOS)
         init_image = np.array(init_image).astype(np.float64) / 255.0 * 2.0 - 1.0
         init_image = torch.from_numpy(init_image[np.newaxis, ...].transpose(0, 3, 1, 2))
 
@@ -427,7 +427,7 @@ def baseline_stablediffusion(prompt="",
     
     if prev_image is not None:
         #Resize and prev_image for numpy b h w c -> torch b c h w
-        prev_image = prev_image.resize((width, height), resample=Image.Resampling.LANCZOS)
+        prev_image = prev_image.resize((width, height), resample=Image.LANCZOS)
         prev_image = np.array(prev_image).astype(np.float64) / 255.0 * 2.0 - 1.0
         prev_image = torch.from_numpy(prev_image[np.newaxis, ...].transpose(0, 3, 1, 2))
         
@@ -734,7 +734,7 @@ def coupled_stablediffusion(prompt="",
             init_latent = im.to(device)
         else:
             #Resize and transpose for numpy b h w c -> torch b c h w
-            im = im.resize((width, height), resample=Image.Resampling.LANCZOS)
+            im = im.resize((width, height), Image.LANCZOS)
             im = np.array(im).astype(np.float64) / 255.0 * 2.0 - 1.0
             # check if black and white
             if len(im.shape) < 3:
