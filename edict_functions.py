@@ -24,7 +24,7 @@ import pickle
 # Have diffusers with hardcoded double-casting instead of float
 from diffusers import AutoencoderKL, UNet2DConditionModel
 from diffusers.schedulers.scheduling_utils import SchedulerOutput
-from diffusers import LMSDiscreteScheduler, PNDMScheduler, DDPMScheduler, DDIMScheduler
+from .my_diffusers import LMSDiscreteScheduler, PNDMScheduler, DDPMScheduler, DDIMScheduler
 
 
 import random
