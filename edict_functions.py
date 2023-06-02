@@ -22,8 +22,8 @@ import pickle
 # StableDiffusion P2P implementation originally from https://github.com/bloc97/CrossAttentionControl
 
 # Have diffusers with hardcoded double-casting instead of float
-from diffusers import AutoencoderKL, UNet2DConditionModel
-from diffusers.schedulers.scheduling_utils import SchedulerOutput
+from .my_diffusers import AutoencoderKL, UNet2DConditionModel
+from .my_diffusers.schedulers.scheduling_utils import SchedulerOutput
 from .my_diffusers import LMSDiscreteScheduler, PNDMScheduler, DDPMScheduler, DDIMScheduler
 
 
