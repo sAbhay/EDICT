@@ -22,9 +22,9 @@ import pickle
 # StableDiffusion P2P implementation originally from https://github.com/bloc97/CrossAttentionControl
 
 # Have diffusers with hardcoded double-casting instead of float
-from .my_diffusers import AutoencoderKL, UNet2DConditionModel
-from .my_diffusers.schedulers.scheduling_utils import SchedulerOutput
-from .my_diffusers import LMSDiscreteScheduler, PNDMScheduler, DDPMScheduler, DDIMScheduler
+from diffusers import AutoencoderKL, UNet2DConditionModel
+from diffusers.schedulers.scheduling_utils import SchedulerOutput
+from diffusers import LMSDiscreteScheduler, PNDMScheduler, DDPMScheduler, DDIMScheduler
 
 
 import random
@@ -734,7 +734,7 @@ def coupled_stablediffusion(prompt="",
             init_latent = im.to(device)
         else:
             #Resize and transpose for numpy b h w c -> torch b c h w
-            im = im.resize((width, height), Image.LANCZOS)
+            im = im.resize((width, height), resample=Image.LANCZOS)
             im = np.array(im).astype(np.float64) / 255.0 * 2.0 - 1.0
             # check if black and white
             if len(im.shape) < 3:
